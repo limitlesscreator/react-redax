@@ -3,33 +3,56 @@ import logo from './logo.svg';
 import './App.css';
 
 function hello() {
-    debugger
     alert('Hello IT')
 }
 
 function App() {
-    debugger
+    console.log("App rendered")
     return (
         <div>
-            This is APP component
+            <AppTitle/>
             <Rating/>
             <Accordion/>
+            <Rating/>
+
         </div>
     );
 }
 
-function Rating() {
-    return(
+function AppTitle() {
+    console.log("AppTitle rendered")
+    return <>This is APP component</>
+}
+function AccordionTitle() {
+    return (
         <div>
-            <Star/>
-            <Star/>
-            <Star/>
-            <Star/>
-            <Star/>
+            <h3>Menu</h3>
         </div>
     )
 }
-
+function AccordionBody() {
+    return (
+        <div>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+    )
+}
+function Rating() {
+    console.log("Rating rendered")
+    return(
+        <>
+            <Star/>
+            <Star/>
+            <Star/>
+            <Star/>
+            <Star/>
+        </>
+    )
+}
 function Star() {
     return (
         <div>
@@ -38,16 +61,12 @@ function Star() {
     )
 }
 
+
 function Accordion() {
-    debugger
     return (
         <div>
-            <h3>Menu</h3>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
+            <AccordionTitle/>
+            <AccordionBody/>
         </div>
     )
 }
