@@ -2,14 +2,15 @@ import React, {ChangeEvent, useRef, useState} from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import {Story, Meta} from '@storybook/react/types-6-0';
 import {Simulate} from "react-dom/test-utils";
+import { action } from '@storybook/addon-actions';
+// import select = Simulate.select;
 // import input = Simulate.input;
-
+// import input = Simulate.input;
 
 export default {
     title: 'input',
     // component: input,
 } as Meta;
-
 
 export const UncontrolledInput = () => <input/>
 
@@ -36,4 +37,34 @@ export const GetValueOfUncontrolledInputByButtonPress   = () => {
     return <><input ref={inputRef} />  <button onClick={ save }>save</button> - actual value:{value} </>
 }
 
-export const ControlledInput = () => <input value={"it-incubator.by"}/>
+export const ControlledInput = () => {
+    const [parentValue, setParentValue] = useState('')
+    const onChange =  (e:ChangeEvent<HTMLInputElement>) => { setParentValue(e.currentTarget.value)}
+
+    return <input value={parentValue} onChange={onChange}/>
+}
+
+export const ControlledCheckbox = () => {
+    const [parentValue, setParentValue] = useState(true)
+
+    const onChange =  (e:ChangeEvent<HTMLInputElement>) => {
+        setParentValue(e.currentTarget.checked)}
+    return <input type='checkbox' checked={parentValue} onChange={onChange}/>
+}
+
+export const ControlledSelect = () => {
+    const [parentValue, setParentValue] = useState<string | undefined>('2')
+
+    const onChange =  (e:ChangeEvent<HTMLSelectElement>) => {
+        setParentValue(e.currentTarget.value)
+    }
+    return <select value={parentValue} onChange={onChange}>
+        <option >none</option>
+        <option value="1">Minsk</option>
+        <option value="2">Moscow</option>
+        <option value="3">Kiev</option>
+    </select>
+}
+
+
+export const ControlledInputWithFixedValue = () => <input value={"it-incubator.by"}/>
